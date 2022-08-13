@@ -159,8 +159,7 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_all(self, arg):
-        """Usage: all or all <class> or <class>.all()
-        Prints string representation of all instances.
+        """Prints string representation of all instances.
         """
         args = arg.split()
         all_objs = storage.all()
@@ -169,7 +168,7 @@ class HBNBCommand(cmd.Cmd):
             print(["{}".format(str(v)) for _, v in all_objs.items()])
             return
         if args[0] not in current_classes.keys():
-            print("** class doesn't exist ** ")
+            print("** class doesn't exist **")
             return
         else:
             print(["{}".format(str(v))
@@ -204,7 +203,7 @@ class HBNBCommand(cmd.Cmd):
             return
         if not validate_attrs(args):
             return
-        first_attr = re.findall(r"^[\"\'](.*?)[\"\']", parse_str(args[3]))
+        first_attr = re.findall(r"^[\"\'](.*?)[\"\']", args[3])
         if first_attr:
             setattr(req_instance, args[2], first_attr[0])
         else:
@@ -217,10 +216,10 @@ def validate_classname(args, check_id=False):
     """Runs checks on args to validate classname entry.
     """
     if len(args) < 1:
-        print("** class name missing ** ")
+        print("** class name missing **")
         return False
     if args[0] not in current_classes.keys():
-        print("** class doesn't exist ** ")
+        print("** class doesn't exist **")
         return False
     if len(args) < 2 and check_id:
         print("** instance id missing **")
